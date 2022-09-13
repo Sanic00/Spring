@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+					<!--id=객체임  -->
+		<!--  <bean id="tv" class="polymorphism.SamsungTV"/>  -->
+
+																									<!-- 메소드 호출 해서 사용가능 -->
+ <!-- 	<bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod"/> -->
+ 		
+ 		<!-- 요청이 들어오는 시점에서 bean이 생성되게끔 하는거임 -->
+ 	<!-- 	<bean id="tv" class="polymorphism.SamsungTV" lazy-init="true" /> -->
+ 		
+ 		<!--싱글톤으로 -->
+ <!-- 		<bean id="tv" class="polymorphism.SamsungTV" scope="singleton" /> -->
+ 		
+ 		<!--  싱글톤에서 프로토타입으로 바꾼다. -->
+ 	<!-- 	<bean id="tv" class="polymorphism.SamsungTV" scope="prototype" />
+ 	 -->
+ 	 
+ <!--argument  -->
+ <!-- 	  <bean id="tv" class="polymorphism.SamsungTV"> -->
+ 	<!--  <constructor-arg index="0" ref="sony"/>
+ 	 <constructor-arg index="1" value="40000000"/> -->
+<!--  	 <constructor-arg index="0" ref="apple"/>
+ 	 <constructor-arg index="1" value="40000000"/> -->
+ 	 
+ 	 <!-- setter  getter -->
+ 	 <!-- 
+	<property name="speaker" ref="apple"/> 	 
+	<property name="price" value="4000000"/> 	 
+ 	  </bean> 
+	삼성tv를 sony 스피커를 참조 하게 만든거임  	  
+ 	 <bean id="sony" class="polymorphism.SonySpeaker"/>
+ 	 <bean id="apple" class="polymorphism.AppleSpeaker"/> -->
+ 	  
+ 	  
+ 	  
+ 	<!--   <bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="apple" p:price="400000"/> -->
+
+
+	<!-- 	<bean id="collectionBean" class="com.global.ioc.injection.CollectionBean">
+			<property name="addressList"> -->
+				<!-- 	<list>
+						<value>서울특별시 강남구 역삼동	</value>
+						<value>서울특별시 성동구 행당동</value>
+					</list>	 -->
+					
+				<!-- 	<set value-type="java.lang.String">
+						<value>서울특별시 강남구 역삼동	</value>
+						<value>서울특별시 성동구 행당동</value>
+					</set>
+					 -->
+					
+					<!-- <map>
+					 	<entry>
+					 			<key><value>홍길동</value></key>
+					 					<value>서울특별시 강남구 역삼동</value>
+					 	</entry>
+					 	<entry>
+					 			<key><value>고길동</value></key>
+					 					<value>서울특별시 영등포구  당산동</value>
+					 	</entry>
+					</map> -->
+					<!-- 
+					<props>
+							<prop key="홍길동">서울특별시 강남구 역삼동</prop>
+							<prop key="고길동">서울특별시 영등포구 당산동</prop>
+					</props>
+					 -->
+					
+					
+					
+<!-- 			</property> 
+		</bean> -->
+
+	<!-- 어노테이션 사용 할때 -->
+	<context:component-scan base-package="com.global.biz"></context:component-scan>
+<!--  <bean class="polymorphism.SonySpeaker"></bean> -->
+
+	<!--DataSource 설정  -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+		 	<property name="username" value="scott" />
+		 	<property name="password" value="tiger" />
+	</bean>
+	
+	
+
+</beans>
