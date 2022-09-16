@@ -5,7 +5,7 @@ import java.sql.*;
 public class JDBCUtil {
 	
 	
-	//µå¶óÀÌ¹ö ¿¬°á
+	//ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public static Connection getConnection() {
 		
 		try {

@@ -9,26 +9,26 @@ public class UserServiceClient {
 
 	public static void main(String[] args) {
 			
-		//1.Spring Container ±¸µ¿ÇÔ
+		//1.Spring Container æ´Ñ‰ï¿½ï¿½ï¿½ï¿½æ¹²ï¿½ 
 		AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
 		
-		//2.Spring ÄÁÅ×ÀÌ³Ê·ÎºÎÅÍ °´Ã¼¸¦ ¿äÃ» UserServiceImpl¿¡¼­ °´Ã¼¸¦ ¿äÃ»ÇÔ(Lookup)
+		//2.Spring è€Œâ‘¦ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½æ¿¡ï¿½ éºï¿½ï¿½ï¿½ åª›ï¿½ï§£ï¿½  (UserServiceImpl)ç‘œï¿½ ï¿½ï¿½ï§£ï¿½ï¿½ï¿½æ¹²ï¿½ -->(Lookup)ï¿½ëŒ€ï¿½ì‡¨ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		UserService  userservice = (UserService)container.getBean("userService");
 		
-		//3.·Î±×ÀÎ ±â´É Å×½ºÆ®
+		//3.æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½ æ¹²ê³•ï¿½ï¿½ ï¿½ï¿½ï¿½ã…½ï¿½ï¿½
 		UserVO vo = new UserVO();
 		vo.setId("test");
 		vo.setPassword("test123");
 		
 		UserVO user = userservice.getUser(vo);
 		if(user != null) {
-			System.out.println(user.getName()+"´Ô È¯¿µ");
+			System.out.println(user.getName()+"");
 		}else {
-			System.out.println("·Î±×ÀÎ ½ÇÆÐ È¸¿ø°¡ÀÔ ÇÏ¼¼¿ä");
+			System.out.println("");
 		}
 		
 		
-		//4.Spring ÄÁÅ×ÀÌ³Ê Á¾·á
+		//4.Spring è€Œâ‘¦ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½ é†«ï¿½çŒ·ï¿½
 		container.close();
 	}
 

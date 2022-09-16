@@ -14,7 +14,7 @@ import com.global.biz.common.JDBCUtil;
 import java.sql.Connection;
 
 //저장소
-@Repository
+//@Repository
 public class BoardDAO {
 
 	//JDBC 관련 변수

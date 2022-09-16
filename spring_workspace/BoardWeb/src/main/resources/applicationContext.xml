@@ -4,9 +4,47 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	<!--DataSource 설정  -->
+	<context:property-placeholder location="classpath:config/database.properties"/>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		 	<property name="driverClassName" value="${jdbc.driver}"/>
+		 	<property name="url" value="${jdbc.url}"/>
+		 	<property name="username" value="${jdbc.username}" />
+		 	<property name="password" value="${jdbc.password}" />
+	</bean> 
+	
+	<!-- Spring Jdbc 설정 -->
+	<bean id="jbdcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource"></property>
+
+	</bean>
+	
+	
+	<!-- Transaction 설정  -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"></property>
+	</bean>	
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+			<tx:attributes>
+					<tx:method name="get*" read-only="true"/>
+					<tx:method name="*" />
+			</tx:attributes>
+	
+	</tx:advice>
+	
+	
+	<aop:config>
+			<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="txPointcut"/>
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+	
+	
 					<!--id=객체임  -->
 		<!--  <bean id="tv" class="polymorphism.SamsungTV"/>  -->
 
@@ -81,29 +119,50 @@
 
 	<!-- 어노테이션 사용 할때 -->
 	<context:component-scan base-package="com.global.biz"></context:component-scan>
-	<bean id="log" class="com.global.biz.common.Log4jAdvice"></bean>
+	<!-- 각페이지에 어노테이션 있으면 얘가 다  잡아줌 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+	
+	<!-- <bean id="afterReturning" class="com.global.biz.common.AfterReturningAdvice"></bean> 
+	<bean id="before" class="com.global.biz.common.BeforeAdivice"/>
+ 	<bean id="afterThrowing" class="com.global.biz.common.AfterThrowingAdivice"></bean>
+	<bean id="after" class="com.global.biz.common.AfterAdvice"></bean>
+	<bean id="around" class="com.global.biz.common.AroundAdvice"></bean>
+	
 	<aop:config>
 		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/>
 		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/>
 		
-			<aop:aspect ref="log">
-					<!-- 이런 메소드들이 언제 동작하는지 동작시점 -->
-					<aop:after method="printLogging" pointcut-ref="getPointcut"/>
+		<aop:aspect ref="around">
+					이런 메소드들이 언제 동작하는지 동작시점
+					<aop:around method="aroundLog"  pointcut-ref="allPointcut"/>
+			</aop:aspect>
+		
+		
+			<aop:aspect ref="afterThrowing">
+					<aop:after-throwing method="exceptionLog" throwing="exceptionObj" pointcut-ref="allPointcut"/>
 			</aop:aspect>
 			
-			<aop:advisor advice-ref=""/>
-	</aop:config>
+			<aop:aspect ref="after">
+					<aop:after method="finallyLog" pointcut-ref="allPointcut"/>
+			</aop:aspect>
+			
+			<aop:aspect ref="before">
+					<aop:after method="beforeLog" pointcut-ref="allPointcut"/>
+			</aop:aspect> 
+			
+			<aop:aspect ref="afterReturning">
+					이런 메소드들이 언제 동작하는지 동작시점
+					<aop:after-returning method="afterLog" returning="returnObj" pointcut-ref="getPointcut"/>
+			</aop:aspect>
+			
+			
+	</aop:config>  -->
 	
 	
 <!--  <bean class="polymorphism.SonySpeaker"></bean> -->
 
-	<!--DataSource 설정  -->
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
-		 	<property name="username" value="scott" />
-		 	<property name="password" value="tiger" />
-	</bean> -->
 	
 	<!-- 
 	<bean id="userDAO" class="com.global.biz.user.impl.UserDAO"/>
