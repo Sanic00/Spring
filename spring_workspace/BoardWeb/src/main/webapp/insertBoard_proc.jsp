@@ -6,7 +6,7 @@
        <%@ page import="com.global.biz.board.BoardVO" %>
    
    
-<%
+<%-- <%
 //1. 사용자 입력 정보 추출
 request.setCharacterEncoding("utf-8");
 String title=request.getParameter("title");
@@ -25,4 +25,4 @@ boardDAO.insertBoard(vo);
 //화면 응답
 response.sendRedirect("getBoardList.jsp");
 
-%>
+%> --%>

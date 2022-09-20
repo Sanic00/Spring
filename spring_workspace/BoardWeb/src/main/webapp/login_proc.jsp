@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    	<%@page import="com.global.biz.user.UserVO" %>
+<%--     	<%@page import="com.global.biz.user.UserVO" %>
     	<%@page import="com.global.biz.user.impl.UserDAO" %>
     	
     	<%
@@ -25,4 +25,4 @@
 		}
 		
     	%>
-    	
+    	 --%>

@@ -4,7 +4,7 @@
        <%@ page import="com.global.biz.board.impl.BoardDAO" %>
        <%@ page import="com.global.biz.board.BoardVO" %>
    
-   <%
+<%--    <%
  //1. 사용자 입력 정보 추출
    request.setCharacterEncoding("utf-8");
    String title=request.getParameter("title");
@@ -26,3 +26,4 @@
    
    
    %>
+ --%>
