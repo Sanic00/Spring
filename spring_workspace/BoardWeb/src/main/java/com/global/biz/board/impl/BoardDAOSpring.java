@@ -23,6 +23,9 @@ public class BoardDAOSpring{
 	private final String BOARD_DELETE="delete board where seq=?";
 	private final String BOARD_GET="select * from board where seq=?";
 	private final String BOARD_LIST="select * from board order by seq desc";
+	//검색 넣어야됨
+	
+	
 	
 	//2번째 
 	@Autowired
@@ -73,6 +76,7 @@ public class BoardDAOSpring{
 		System.out.println("=======> Spring JDBC로 getBoardList() 기능 처리......");
 		//return getJdbcTemplate().query(BOARD_LIST, new BoardRowMapper());
 		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
+		
 	}
 	
 }
