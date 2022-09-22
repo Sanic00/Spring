@@ -1,29 +1,21 @@
 package com.global.view.board;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.global.biz.board.BoardVO;
 import com.global.biz.board.impl.BoardDAO;
-import com.global.view.controller.Controller;
 
-public class InsertBoardController implements Controller {
-
-	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+//@Controller
+public class InsertBoardController  {
+	
+	//매핑값
+	//@RequestMapping(value = "/insertBoard.do")
+	public  String insertBoard(BoardVO vo, BoardDAO boardDAO) {
 		System.out.println("글 등록 처리");
-		
-		String title=request.getParameter("title");
-		String writer=request.getParameter("writer");
-		String content=request.getParameter("content");
-
-		//DB연동
-		BoardVO vo = new BoardVO();
-		vo.setTitle(title);
-		vo.setWriter(writer);
-		vo.setContent(content);
-
-		BoardDAO boardDAO = new BoardDAO();
+	
 		boardDAO.insertBoard(vo);
 		
 		return "getBoardList.do";

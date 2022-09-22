@@ -32,7 +32,7 @@
 	<div align="center">
 		<h1>글 목록</h1>
 		<h3>
-			테스트님 환영합니다....<a href="logout.do">Log-Out</a>
+		   게시판에 오신 ${userName}님 환영합니다....<a href="logout.do">Log-Out</a>
 		</h3>	
 		
 		<form action="getBoardList.do" method="post">
