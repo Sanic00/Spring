@@ -12,8 +12,8 @@ import com.global.biz.board.BoardVO;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
-	@Autowired
 	//private BoardDAO boardDAO;
+	@Autowired
 	private BoardDAOSpring boardDAO;
 	
 	@Override

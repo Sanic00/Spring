@@ -38,6 +38,10 @@ public class LoginController {
 		
 		System.out.println("로그인처리");
 		
+		if(vo.getId() == null || vo.getId().equals("")) {
+			throw new  IllegalArgumentException("아이디는 반드시 입력하셔야 합니다.");
+		}
+		
 		UserVO user = userDAO.getUser(vo);
 //		String id = request.getParameter("id");
 //		String password =request.getParameter("password");
