@@ -3,7 +3,7 @@
     
         
        <%@ page import="com.global.biz.board.impl.BoardDAO" %>
-       <%@ page import="com.global.biz.board.BoardVO" %>
+       <%@ page import="com.global.biz.BoardVO" %>
    
    
 <%-- <%
