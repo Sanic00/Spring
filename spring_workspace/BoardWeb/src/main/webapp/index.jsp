@@ -1,24 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Index</title>
+<meta charset="EUC-KR">
+<title>Main Page</title>
 </head>
 <body>
-	<div align="center">
-		<h1>ê²Œì‹œíŒ í”„ë¡œê·¸ëž¨</h1>
-		<hr>
-		<a href="login.do" >ë¡œê·¸ì¸</a>
-		<br>
-		<a href="getBoardList.do">ê¸€ ëª©ë¡ ë°”ë¡œê°€ê¸°</a>
-		<hr>
-	</div>			
-
-
-
-
+   <div align="center">
+        <h1>°Ô½ÃÆÇ ÇÁ·Î±×·¥</h1>
+        <hr>
+        <a href="login.do">·Î±×ÀÎ</a>
+        <br>
+        <a href="getBoardList.do">±Û ¸ñ·Ï ¹Ù·Î °¡±â</a>
+        <hr>
+        
+        
+   </div>
 
 </body>
 </html>

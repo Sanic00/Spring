@@ -1,85 +1,97 @@
 package com.global.biz.common;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class JDBCUtil {
-	
-	
-	//����̹� ����
+
 	public static Connection getConnection() {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",
-					"scott","tiger");
-		} catch (Exception e) {
+			return DriverManager.getConnection(
+					"jdbc:oracle:thin:@127.0.0.1:1521:orcl", 
+					"scott", "tiger");
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
 	public static void close(PreparedStatement stmt, Connection conn) {
-		if(stmt !=null) {
+		if(stmt != null) {
 			try {
-				if(!stmt.isClosed())
+				if(!stmt.isClosed()) 
 					stmt.close();
-			}catch(Exception e) {
+				
+			}catch(Exception e){
 				e.printStackTrace();
 			}finally {
 				stmt = null;
 			}
+		}
 		
-		}
-	
-		if(conn !=null) {
-		try {
-			if(!conn.isClosed())
-				conn.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			conn = null;
-		}
-	
-	}
-	}
-
-	public static void close(ResultSet rs,PreparedStatement stmt, Connection conn) {
-		if(rs !=null) {
+		if(conn != null) {
 			try {
-				if(!rs.isClosed())
+				if(!conn.isClosed()) 
+					conn.close();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				conn = null;
+			}
+		}
+	}
+	
+	public static void close(ResultSet rs, PreparedStatement stmt, Connection conn) {
+		
+		if(rs != null) {
+			try {
+				if(!rs.isClosed()) 
 					rs.close();
-			}catch(Exception e) {
+				
+			}catch(Exception e){
 				e.printStackTrace();
 			}finally {
 				rs = null;
 			}
+		}
 		
+		
+		if(stmt != null) {
+			try {
+				if(!stmt.isClosed()) 
+					stmt.close();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				stmt = null;
+			}
 		}
-	
-		if(stmt !=null) {
-		try {
-			if(!stmt.isClosed())
-				stmt.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			stmt = null;
+		
+		if(conn != null) {
+			try {
+				if(!conn.isClosed()) 
+					conn.close();
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally {
+				conn = null;
+			}
 		}
+	}
 	
-	}
-
-	if(conn !=null) {
-	try {
-		if(!conn.isClosed())
-			conn.close();
-	}catch(Exception e) {
-		e.printStackTrace();
-	}finally {
-		conn = null;
-	}
-
-	}
+	
+	
+	
+	
+	
+	
+	
 }
-}
-

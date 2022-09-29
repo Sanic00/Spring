@@ -12,39 +12,32 @@ import com.global.biz.board.BoardVO;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
-	//private BoardDAO boardDAO;
 	@Autowired
-	private BoardDAOSpring boardDAO;
-	
+	private BoardDAOMybatis boardDAO;
+	//private BoardDAOSpring boardDAO;
+	//private BoardDAO boardDAO;
+
 	@Override
 	public void insertBoard(BoardVO vo) {
-		
-		
-		/*
-		 * if(vo.getSeq() == 0) { throw new
-		 * IllegalArgumentException("0번 글은 등록할 수 없사옵니다"); }
-		 * 
-		 */
-		 
+	
 		boardDAO.insertBoard(vo);
-		boardDAO.insertBoard(vo);
-
 	}
 
 	@Override
 	public void updateBoard(BoardVO vo) {
+		
 		boardDAO.updateBoard(vo);
-
 	}
 
 	@Override
 	public void deleteBoard(BoardVO vo) {
+		
 		boardDAO.deleteBoard(vo);
 	}
 
 	@Override
 	public BoardVO getBoard(BoardVO vo) {
-	
+		
 		return boardDAO.getBoard(vo);
 	}
 

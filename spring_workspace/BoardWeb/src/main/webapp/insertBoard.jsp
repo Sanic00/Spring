@@ -1,47 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ÏÉàÍ∏Ä Îì±Î°ù</title>
+<meta charset="EUC-KR">
+<title>ªı±€µÓ∑œ</title>
 </head>
 <body>
 <div align="center">
-	<h1>Í∏Ä Îì±Î°ù</h1>
-	<a href="logout.do">Log-out</a>
-	<hr>
-	<form action="insertBoard.do" method="post" enctype="multipart/form-data">
-		<table border="1" cellpadding="0" cellspacing="0">
-			 <tr>
-			 	 <td bgcolor="skyblue" width="70">Ï†úÎ™©</td>
-			 	 <td align="left"><input type="text" name="title"></td>
-			 </tr>
-			 
-			  <tr>
-			 	 <td bgcolor="skyblue" >ÏûëÏÑ±Ïûê</td>
-			 	 <td align="left"><input type="text" name="writer" size="10"></td>
-			 </tr>
-			 
-			  <tr>
-			 	 <td bgcolor="skyblue" >ÎÇ¥Ïö©</td>
-			 	 <td align="left"><textarea rows="10" cols="40" name="content"></textarea></td>
-			 </tr>
-			 
-			 <tr>
-			 		<td bgcolor="orange" width="70">ÏóÖÎ°úÎìú</td>
-			 		<td align="left"><input type="file" name="uploadFile"></td>
-			 </tr>
-			 
-			 <tr>
-					 <td colspan="2" align="center"><input type="submit" value="Í∏ÄÎì±Î°ù"></td>
-			</tr>
-			 
-		
-		</table>
-	</form>
-	<hr>
-	<a href="getBoardList.do">Í∏Ä Î™©Î°ù Í∞ÄÍ∏∞</a>
+      <h1>±€µÓ∑œ</h1>
+      <a href="logout.do">Log-out</a>
+      <hr>
+      <form action="insertBoard.do" method="post" enctype="multipart/form-data">
+         <table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                 <td bgcolor="orange" width="70">¡¶∏Ò</td>
+                 <td align="left"><input type="text" name="title"></td>
+           </tr>
+           <tr>
+                 <td bgcolor="orange">¿€º∫¿⁄</td>
+                 <td align="left"><input type="text" name="writer" size="10"></td>
+           </tr>
+           <tr>
+                 <td bgcolor="orange">≥ªøÎ</td>
+                 <td align="left">
+                 <textarea name="content" rows="10" cols="40"></textarea>
+                 </td>
+           </tr>
+           
+           <tr>
+               <td bgcolor="orange" width="70">æ˜∑ŒµÂ</td>
+               <td align="left"><input type="file" name="uploadFile"></td>
+           </tr>
+           
+          <tr>
+       <td colspan="2" align="center">
+       <input type="submit" value="±€µÓ∑œ"></td>
+    </tr>
+         </table>
+      </form>
+      <hr>
+      <a href="getBoardList.do">±€ ∏Ò∑œ ∞°±‚</a>
+
 </div>
 
 </body>

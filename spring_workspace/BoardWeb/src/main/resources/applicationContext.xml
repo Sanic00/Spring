@@ -9,169 +9,117 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-	<!--DataSource 설정  -->
-	<context:property-placeholder location="classpath:config/database.properties"/>
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		 	<property name="driverClassName" value="${jdbc.driver}"/>
-		 	<property name="url" value="${jdbc.url}"/>
-		 	<property name="username" value="${jdbc.username}" />
-		 	<property name="password" value="${jdbc.password}" />
-	</bean> 
-	
-	<!-- Spring Jdbc 설정 -->
-	<bean id="jbdcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-			<property name="dataSource" ref="dataSource"></property>
 
-	</bean>
-	
-	
-	<!-- Transaction 설정  -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-			<property name="dataSource" ref="dataSource"></property>
-	</bean>	
-	
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-			<tx:attributes>
-					<tx:method name="get*" read-only="true"/>
-					<tx:method name="*" />
-			</tx:attributes>
-	
-	</tx:advice>
-	
-	
-	<aop:config>
-			<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="txPointcut"/>
-			<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-	</aop:config>
-	
-	
-					<!--id=객체임  -->
-		<!--  <bean id="tv" class="polymorphism.SamsungTV"/>  -->
-
-																									<!-- 메소드 호출 해서 사용가능 -->
- <!-- 	<bean id="tv" class="polymorphism.SamsungTV" init-method="initMethod" destroy-method="destroyMethod"/> -->
- 		
- 		<!-- 요청이 들어오는 시점에서 bean이 생성되게끔 하는거임 -->
- 	<!-- 	<bean id="tv" class="polymorphism.SamsungTV" lazy-init="true" /> -->
- 		
- 		<!--싱글톤으로 -->
- <!-- 		<bean id="tv" class="polymorphism.SamsungTV" scope="singleton" /> -->
- 		
- 		<!--  싱글톤에서 프로토타입으로 바꾼다. -->
- 	<!-- 	<bean id="tv" class="polymorphism.SamsungTV" scope="prototype" />
- 	 -->
- 	 
- <!--argument  -->
- <!-- 	  <bean id="tv" class="polymorphism.SamsungTV"> -->
- 	<!--  <constructor-arg index="0" ref="sony"/>
- 	 <constructor-arg index="1" value="40000000"/> -->
-<!--  	 <constructor-arg index="0" ref="apple"/>
- 	 <constructor-arg index="1" value="40000000"/> -->
- 	 
- 	 <!-- setter  getter -->
- 	 <!-- 
-	<property name="speaker" ref="apple"/> 	 
-	<property name="price" value="4000000"/> 	 
- 	  </bean> 
-	삼성tv를 sony 스피커를 참조 하게 만든거임  	  
- 	 <bean id="sony" class="polymorphism.SonySpeaker"/>
- 	 <bean id="apple" class="polymorphism.AppleSpeaker"/> -->
- 	  
- 	  
- 	  
- 	<!--   <bean id="tv" class="polymorphism.SamsungTV" p:speaker-ref="apple" p:price="400000"/> -->
-
-
-	<!-- 	<bean id="collectionBean" class="com.global.ioc.injection.CollectionBean">
-			<property name="addressList"> -->
-				<!-- 	<list>
-						<value>서울특별시 강남구 역삼동	</value>
-						<value>서울특별시 성동구 행당동</value>
-					</list>	 -->
-					
-				<!-- 	<set value-type="java.lang.String">
-						<value>서울특별시 강남구 역삼동	</value>
-						<value>서울특별시 성동구 행당동</value>
-					</set>
-					 -->
-					
-					<!-- <map>
-					 	<entry>
-					 			<key><value>홍길동</value></key>
-					 					<value>서울특별시 강남구 역삼동</value>
-					 	</entry>
-					 	<entry>
-					 			<key><value>고길동</value></key>
-					 					<value>서울특별시 영등포구  당산동</value>
-					 	</entry>
-					</map> -->
-					<!-- 
-					<props>
-							<prop key="홍길동">서울특별시 강남구 역삼동</prop>
-							<prop key="고길동">서울특별시 영등포구 당산동</prop>
-					</props>
-					 -->
-					
-					
-					
-<!-- 			</property> 
-		</bean> -->
-
-	<!-- 어노테이션 사용 할때 -->
-	<context:component-scan base-package="com.global.biz"></context:component-scan>
-	<!-- 각페이지에 어노테이션 있으면 얘가 다  잡아줌 -->
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
-	
-	
-	<!-- <bean id="afterReturning" class="com.global.biz.common.AfterReturningAdvice"></bean> 
-	<bean id="before" class="com.global.biz.common.BeforeAdivice"/>
- 	<bean id="afterThrowing" class="com.global.biz.common.AfterThrowingAdivice"></bean>
-	<bean id="after" class="com.global.biz.common.AfterAdvice"></bean>
-	<bean id="around" class="com.global.biz.common.AroundAdvice"></bean>
-	
-	<aop:config>
-		<aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut"/>
-		<aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut"/>
-		
-		<aop:aspect ref="around">
-					이런 메소드들이 언제 동작하는지 동작시점
-					<aop:around method="aroundLog"  pointcut-ref="allPointcut"/>
-			</aop:aspect>
-		
-		
-			<aop:aspect ref="afterThrowing">
-					<aop:after-throwing method="exceptionLog" throwing="exceptionObj" pointcut-ref="allPointcut"/>
-			</aop:aspect>
-			
-			<aop:aspect ref="after">
-					<aop:after method="finallyLog" pointcut-ref="allPointcut"/>
-			</aop:aspect>
-			
-			<aop:aspect ref="before">
-					<aop:after method="beforeLog" pointcut-ref="allPointcut"/>
-			</aop:aspect> 
-			
-			<aop:aspect ref="afterReturning">
-					이런 메소드들이 언제 동작하는지 동작시점
-					<aop:after-returning method="afterLog" returning="returnObj" pointcut-ref="getPointcut"/>
-			</aop:aspect>
-			
-			
-	</aop:config>  -->
-	
-	
-<!--  <bean class="polymorphism.SonySpeaker"></bean> -->
-
-	
-	<!-- 
-	<bean id="userDAO" class="com.global.biz.user.impl.UserDAO"/>
-	
-	<bean id="userService" class="com.global.biz.user.impl.UserServiceImpl">
-			<property name="userDAO" ref="userDAO"></property>
-		
-	
-	</bean>
- -->
-
+    <context:component-scan base-package="com.global.biz"></context:component-scan>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+   
+   <!--  DataSource 설정 -->
+   <context:property-placeholder location="classpath:config/database.properties" />
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+      <property name="driverClassName" value="${jdbc.driver}" />
+      <property name="url" value="${jdbc.url}" />
+      <property name="username" value="${jdbc.username}" />
+      <property name="password" value="${jdbc.password}" />  
+   </bean>
+   
+   
+   <!-- Spring Jdbc 설정 -->
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   
+   <!--  Transaction 설정 -->
+   <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   
+   <!-- <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+          <property name="dataSource" ref="dataSource"></property>
+          <property name="configLocation" value="classpath:sql-map-config.xml"></property>   
+   </bean> -->
+   
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"></property>
+          <property name="configLocation" value="classpath:sql-map-config.xml"></property>
+   </bean>
+   
+   
+   <bean class="org.mybatis.spring.SqlSessionTemplate">
+         <constructor-arg ref="sqlSession"></constructor-arg>
+   </bean>
+   
+   
+   
+   
+   <tx:advice id="txAdvice" transaction-manager="txManager">
+          <tx:attributes>
+                <tx:method name="get*" read-only="true"/>
+                <tx:method name="*"/>
+          </tx:attributes>  
+   </tx:advice>
+   
+   
+   <aop:config>
+   
+      <aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="txPointcut" />
+      <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+   </aop:config>
+   
+   
+   
+   
+   
+  <!--  
+   
+   
+   <bean id="before" class="com.global.biz.common.BeforeAdvice"></bean>
+   <bean id="afterReturning" class="com.global.biz.common.AfterReturningAdvice"></bean>
+   <bean id="afterThrowing" class="com.global.biz.common.AfterThrowingAdvice"></bean>
+   <bean id="after" class="com.global.biz.common.AfterAdvice"></bean>
+   <bean id="around" class="com.global.biz.common.AroundAdvice"></bean>
+   
+   
+   <aop:config>
+        
+        <aop:pointcut expression="execution(* com.global.biz..*Impl.get*(..))" id="getPointcut" />
+        <aop:pointcut expression="execution(* com.global.biz..*Impl.*(..))" id="allPointcut" />
+         
+         
+          <aop:aspect ref="around">
+                   <aop:around method="aroundLog"  pointcut-ref="allPointcut"/>        
+         </aop:aspect> 
+         
+         
+         
+         <aop:aspect ref="afterThrowing">
+                   <aop:after-throwing method="exceptionLog" throwing="exceptionObj" pointcut-ref="allPointcut"/>        
+          </aop:aspect> 
+          
+         <aop:aspect ref="after">
+                   <aop:after method="finallyLog" pointcut-ref="allPointcut"/>        
+         </aop:aspect>       
+         
+         
+         
+          <aop:aspect ref="before">
+                   <aop:before method="beforeLog" pointcut-ref="allPointcut"/>        
+         </aop:aspect>       
+         
+          <aop:aspect ref="afterReturning">
+                   <aop:after-returning method="afterLog" returning="returnObj"  pointcut-ref="getPointcut"/>        
+         </aop:aspect> 
+         
+   
+   </aop:config>
+    -->
+   
+   
+   
+   
+   
+   
+   
+   
+   
+     
 </beans>

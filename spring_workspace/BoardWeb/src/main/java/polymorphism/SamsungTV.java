@@ -1,70 +1,73 @@
 package polymorphism;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-
-@Service
-@Repository
-@Controller
 public class SamsungTV implements TV{
 
-	private Speaker speaker; // 삼성tv에 sony를 injection함
-	private int price; 
 	
-	public void initMethod() {
-		// 객체의 초기화 작업 메소드
-		System.out.println("객체 초기화 작업을 처리함");
+	private Speaker speaker;
+	private int price;
+	
+	
+	
+	public void setSpeaker(Speaker speaker) {
+		System.out.println("===> setSpeaker() 호출...");
+		this.speaker = speaker;
 	}
+
+	public void setPrice(int price) {
+		System.out.println("===> setPrice() 호출...");
+		this.price = price;
+	}
+
+
+	public void initMethod() {
+		System.out.println("객체 초기화 작업을 처리함.....");
+	}
+	
+	
 	public void destroyMethod() {
-		// 객체의 초기화 작업 메소드
-		System.out.println("객체 삭제 전에 처리할 로직");
+		System.out.println("객체 삭제 전에 처리할 로직을 처리함  .....");
 	}
 	
 	public SamsungTV() {
-		System.out.println("====> SamsungTV(1) 객체 생성...");
+	    System.out.println("====> SamsungTV(1) 객체 생성...");
 	}
+	
 	public SamsungTV(Speaker speaker) {
-		System.out.println("====> SamsungTV(2) 객체 생성...");
-		this.speaker = speaker;
-	}
-	public SamsungTV(Speaker speaker, int price) {
-		System.out.println("====> SamsungTV(3) 객체 생성...");
-		this.speaker = speaker;
-		this.price = price;
+	    System.out.println("====> SamsungTV(2) 객체 생성...");
+	    this.speaker=speaker;
 	}
 	
-	@Override
+	
+	  public SamsungTV(Speaker speaker, int price) {
+	  System.out.println("====> SamsungTV(3) 객체 생성..."); this.speaker=speaker;
+	  this.price = price; }
+	 
+	
+	
+	
+	
 	public void powerOn() {
-		System.out.println("SamsungTV ----- 전원 켠다.(스피커 가격:"+price+"원)");
-		// System.out.println("SamsungTV ----- 전원 켠다.");
+		System.out.println("SamsungTV ------ 전원 켠다. (가격: "+price+")");
+	//	System.out.println("SamsungTV ------ 전원 켠다. ");
 	}
-	@Override
+	
 	public void powerOff() {
-		System.out.println("SamsungTV ----- 전원 꺼진다.");
+		System.out.println("SamsungTV ------ 전원 끈다. ");
 	}
-	@Override
+	
 	public void volumeUp() {
+		//speaker = new SonySpeaker();
 		speaker.volumeUp();
+		//System.out.println("SamsungTV ------ 소리 올린다. ");
 	}
-	@Override
+	
 	public void volumeDown() {
+		//speaker = new SonySpeaker();
 		speaker.volumeDown();
+//		System.out.println("SamsungTV ------ 소리 내린다. ");
 	}
 	
-	public void setSpeaker(Speaker speaker) {
-		System.out.println("===> setSpeaker() 호출");
-		this.speaker = speaker;
-	}
 	
-	public void setPrice(int price) {
-		System.out.println("===> setPrice() 호출");
-		this.price = price;
-	}
 }
-	
-	
-
-

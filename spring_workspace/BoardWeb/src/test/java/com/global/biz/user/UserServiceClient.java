@@ -3,33 +3,37 @@ package com.global.biz.user;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import com.global.biz.board.BoardService;
-
 public class UserServiceClient {
 
 	public static void main(String[] args) {
-			
-		//1.Spring Container æ´Ñ‰ï¿½ï¿½ï¿½ï¿½æ¹²ï¿½ 
-		AbstractApplicationContext container = new GenericXmlApplicationContext("applicationContext.xml");
+	
+		// 1. Spring ÄÁÅ×ÀÌ³Ê ±¸µ¿ÇÔ
+		AbstractApplicationContext container = 
+				new GenericXmlApplicationContext("applicationContext.xml");
 		
-		//2.Spring è€Œâ‘¦ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½æ¿¡ï¿½ éºï¿½ï¿½ï¿½ åª›ï¿½ï§£ï¿½  (UserServiceImpl)ç‘œï¿½ ï¿½ï¿½ï§£ï¿½ï¿½ï¿½æ¹²ï¿½ -->(Lookup)ï¿½ëŒ€ï¿½ì‡¨ï¿½ ï¿½ï¿½ï¿½ï¿½.
-		UserService  userservice = (UserService)container.getBean("userService");
 		
-		//3.æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½ æ¹²ê³•ï¿½ï¿½ ï¿½ï¿½ï¿½ã…½ï¿½ï¿½
+		// 2. Spring ÄÁÅ×ÀÌ³Ê·ÎºÎÅÍ UserServiceImpl °´Ã¼¸¦ ¿äÃ»(Lookup)ÇÔ
+		UserService userService = (UserService)container.getBean("userService");
+		
+		// 3. ·Î±×ÀÎ ±â´É Å×½ºÆ®
 		UserVO vo = new UserVO();
 		vo.setId("test");
 		vo.setPassword("test123");
 		
-		UserVO user = userservice.getUser(vo);
+		UserVO user = userService.getUser(vo);
+		
 		if(user != null) {
-			System.out.println(user.getName()+"");
+			System.out.println(user.getName()+"´Ô ¹«Àð°Ô È¯¿µÇÕ´Ï´Ù.");
 		}else {
-			System.out.println("");
+			System.out.println("·Î±×ÀÎ ½ÇÆÐ!! »ç¿ëÀÚ°Ý ¾øÀ½.....");
 		}
 		
 		
-		//4.Spring è€Œâ‘¦ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½ é†«ï¿½çŒ·ï¿½
+		
+		// 4. Spring ÄÁÅ×ÀÌ³Ê Á¾·á
 		container.close();
+		
+
 	}
 
 }

@@ -9,10 +9,8 @@ import com.global.biz.board.BoardVO;
 
 public class BoardRowMapper implements RowMapper<BoardVO>{
 
-	
 	@Override
 	public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
 		BoardVO board = new BoardVO();
 		board.setSeq(rs.getInt("SEQ"));
 		board.setTitle(rs.getString("TITLE"));
@@ -20,7 +18,7 @@ public class BoardRowMapper implements RowMapper<BoardVO>{
 		board.setContent(rs.getString("CONTENT"));
 		board.setRegDate(rs.getDate("REGDATE"));
 		board.setCnt(rs.getInt("CNT"));
-		
 		return board;
 	}
+
 }
